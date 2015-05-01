@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form class="form" action="{% url 'profile_update' %}" method="post">
+
+        {% csrf_token %}
+
+        {{ user_update_form.non_field_errors }}
+        <fieldset>
+
+        <table class="table table-condensed table-hover">
+            <tbody>
+            <tr><td>Username :</td><td> {{ user.username }}</td></tr>
+            <tr>
+                <td>
+                    <label for="{{ user_update_form.email.id_for_label }}">Email :</label>
+                </td>
+                <td>
+                    <span style="color: red;">{{user_update_form.email.errors}}</span>
+                    {{ user_update_form.email }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="{{ profile_form.country.id_for_label }}">Country :</label>
+                </td>
+                <td>
+                    <span style="color: red;">{{profile_form.country.errors}}</span>
+                    {{ profile_form.country }}
+                </td>
+            </tr>
+            <tr><td>Date registered :</td><td> {{ user.date_joined }}</td></tr>
+            <tr>
+                <td><input class="btn btn-success" type="submit" name="submit" value="Update"></td>
+                <td><a class="btn btn-warning" href="{% url 'profile' %}" type="button" name="submit">Cancel</a></td>
+            </tr>
+            </tbody>
+        </table>
+        </fieldset>
+    </form>
+{% endblock %}

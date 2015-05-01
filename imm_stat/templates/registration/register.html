@@ -1,0 +1,39 @@
+ {% extends 'base.html' %}
+ {% block content %}
+ <div class="col-md-6">
+    <div class="login-panel panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Registration</h3>
+        </div>
+        <div class="panel-body">
+            <form role="form" action="{% url 'register' %}" method="post">
+                <fieldset>
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    <div class="form-group">
+                    <span style="color: red;">{{form.username.errors}}</span>
+                        <label for="{{ form.username.id_for_label }}">Username:</label>
+                        {{ form.username }}<br>
+                    <span style="color: red;">{{form.email.errors}}</span>
+                        <label for="{{ form.email.id_for_label }}">Email:</label>
+                        {{ form.email }}<br>
+                    <span style="color: red;">{{profile_form.country.errors}}</span>
+                        <label for="{{ profile_form.country.id_for_label }}">Country:</label>
+                        {{ profile_form.country }}<br>
+                    </div>
+                    <span style="color: red;">{{form.password1.errors}}</span>
+                    <div class="form-group">
+                        <label for="{{ form.password1.id_for_label }}">Password:</label>
+                        {{ form.password1 }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.password2 }}
+                    </div>
+                    <input class="btn btn-sm btn-success" type="submit" name="submit" value="Register">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+ {% endblock %}

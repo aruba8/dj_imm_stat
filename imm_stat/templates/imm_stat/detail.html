@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="table table-condensed table-hover">
+    <tbody>
+    <tr><td>Nickname :</td><td> {{ userdata.username }}</td></tr>
+    <tr><td>Stream :</td><td> {{ userdata.stream |default_if_none:""}}</td></tr>
+    <tr><td>From :</td><td> {{ userdata.from_full|default_if_none:""}}</td></tr>
+    <tr><td>Interview location :</td><td> {{ userdata.interview_location|default_if_none:"" }}</td></tr>
+    <tr><td>Interview date :</td><td> {{ userdata.interview_date|default_if_none:""}}</td></tr>
+    <tr><td>Invitation to apply date :</td><td> {{ userdata.invitation_to_apply_date|default_if_none:""}}</td></tr>
+    <tr><td>MPNP request additional docs date :</td><td> {{ userdata.mpnp_request_additional_docs_date|default_if_none:""}}</td></tr>
+    <tr><td>MPNP nomination date :</td><td> {{ userdata.mpnp_nomination_date|default_if_none:"" }}</td></tr>
+    <tr><td>CIO received date :</td><td> {{ userdata.cio_received_date|default_if_none:"" }}</td></tr>
+    <tr><td>CIO processing fee date :</td><td> {{ userdata.cio_processing_fee_date|default_if_none:"" }}</td></tr>
+    <tr><td>CIO file number :</td><td> {{ userdata.cio_file_number|default_if_none:"" }}</td></tr>
+    <tr><td>Embassy :</td><td> {{ userdata.embassy|default_if_none:""}}</td></tr>
+    <tr><td>ECAS recieved :</td><td> {{ userdata.ecas_recieved|default_if_none:"" }}</td></tr>
+    <tr><td>ECAS in process :</td><td> {{ userdata.ecas_in_process|default_if_none:"" }}</td></tr>
+    <tr><td>ECAS additional documents request  :</td><td> {{ userdata.ecas_additional_documents_request1|default_if_none:""}}</td></tr>
+    <tr><td>ECAS medical forms :</td><td> {{ userdata.ecas_medical_forms|default_if_none:"" }}</td></tr>
+    <tr><td>ECAS medical exam passed :</td><td> {{ userdata.ecas_medical_exam_passed|default_if_none:"" }}</td></tr>
+    <tr><td>ECAS medical results received :</td><td> {{ userdata.ecas_medical_results_received|default_if_none:"" }}</td></tr>
+    <tr><td>ECAS additional documents request2 :</td><td> {{ userdata.ecas_additional_documents_request2|default_if_none:"" }}</td></tr>
+    <tr><td>POVL date :</td><td> {{ userdata.povl_date|default_if_none:""}}</td></tr>
+    <tr><td>
+    </tbody>
+</table>
+{% endblock %}
