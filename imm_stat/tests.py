@@ -19,4 +19,3 @@ class AuthViewsTest(TestCase):
         response = self.client.get(reverse('register'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Registration')
-        print response

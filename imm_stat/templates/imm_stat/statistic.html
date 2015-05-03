@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    {% if statistic %}
+        <table class="table table-condensed table-hover">
+            <tbody>
+            <tr><td>Nickname :</td><td> {{ statistic.username }}</td></tr>
+            <tr><td>CIC Stream :</td><td> {{ statistic.stream |default_if_none:""}}</td></tr>
+            <tr><td>Provincial Stream :</td><td> {{ statistic.provincial_stream |default_if_none:""}}</td></tr>
+            <tr><td>From :</td><td> {{ statistic.from_country.name|default_if_none:""}}</td></tr>
+            <tr><td>Interview location :</td><td> {{ statistic.interview_location|default_if_none:"" }}</td></tr>
+            <tr><td>Interview date :</td><td> {{ statistic.interview_date|default_if_none:""}}</td></tr>
+            <tr><td>Invitation to apply date :</td><td> {{ statistic.invitation_to_apply_date|default_if_none:""}}</td></tr>
+            <tr><td>MPNP request additional docs date :</td><td> {{ statistic.mpnp_request_additional_docs_date|default_if_none:""}}</td></tr>
+            <tr><td>MPNP nomination date :</td><td> {{ statistic.mpnp_nomination_date|default_if_none:"" }}</td></tr>
+            <tr><td>CIO received date :</td><td> {{ statistic.cio_received_date|default_if_none:"" }}</td></tr>
+            <tr><td>CIO processing fee date :</td><td> {{ statistic.cio_processing_fee_date|default_if_none:"" }}</td></tr>
+            <tr><td>CIO file number :</td><td> {{ statistic.cio_file_number|default_if_none:"" }}</td></tr>
+            <tr><td>Embassy :</td><td> {{ statistic.embassy|default_if_none:""}}</td></tr>
+            <tr><td>ECAS recieved :</td><td> {{ statistic.ecas_recieved|default_if_none:"" }}</td></tr>
+            <tr><td>ECAS in process :</td><td> {{ statistic.ecas_in_process|default_if_none:"" }}</td></tr>
+            <tr><td>ECAS additional documents request  :</td><td> {{ statistic.ecas_additional_documents_request1|default_if_none:""}}</td></tr>
+            <tr><td>ECAS medical forms :</td><td> {{ statistic.ecas_medical_forms|default_if_none:"" }}</td></tr>
+            <tr><td>ECAS medical exam passed :</td><td> {{ statistic.ecas_medical_exam_passed|default_if_none:"" }}</td></tr>
+            <tr><td>ECAS medical results received :</td><td> {{ statistic.ecas_medical_results_received|default_if_none:"" }}</td></tr>
+            <tr><td>ECAS additional documents request2 :</td><td> {{ statistic.ecas_additional_documents_request2|default_if_none:"" }}</td></tr>
+            <tr><td>POVL date :</td><td> {{ statistic.povl_date|default_if_none:""}}</td></tr>
+            {% if user.id == statistic.user_id %}
+            <tr><td><a class="btn btn-warning" href="{% url 'edit_statistic' %}" type="button" name="submit">Edit statistic</a></td><td></td></tr>
+            {% endif %}
+
+            </tbody>
+        </table>
+    {% else %}
+        <h3>Your statistic is empty. To fill it click <a href="{% url 'edit_statistic' %}">here.</a></h3>
+    {% endif %}
+    
+{% endblock %}

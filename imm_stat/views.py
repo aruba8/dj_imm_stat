@@ -1,14 +1,14 @@
-# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render_to_response, redirect, render
 from django.template.context import RequestContext
 from django.views import generic
 from django.contrib.auth import logout
-from imm_stat.forms import UserCreateForm, UserProfileForm, UserUpdateForm
+from imm_stat.forms import UserCreateForm, UserProfileForm, UserUpdateForm, StatisticForm
 
-from imm_stat.models import UserStatistic, User, UserProfile
+from imm_stat.models import UserStatistic, User, Stream, ProvincialStream
 
 
 class IndexView(generic.ListView):
@@ -19,23 +19,12 @@ class IndexView(generic.ListView):
         return UserStatistic.objects.all()
 
 
-class ProfileView(generic.DetailView):
-    model = User
-    template_name = 'imm_stat/profile.html'
-    context_object_name = 'user'
-
-    def get_context_data(self, **kwargs):
-        context = super(ProfileView, self).get_context_data(**kwargs)
-        context['userdata'] = UserStatistic.objects.filter(user_id=self.object.id).first()
-        context['profile'] = UserProfile.objects.filter(user_id=self.object.id).first()
-        return context
-
-
+@login_required
 def profile(request):
     user = User.objects.get(pk=request.user.id)
     return render(request, 'imm_stat/profile.html', {'user': user})
 
-
+@login_required
 def profile_update(request):
     user = User.objects.get(pk=request.user.id)
     if request.method == 'POST':
@@ -44,8 +33,6 @@ def profile_update(request):
         if user_update_form.is_valid() and profile_form.is_valid():
             user_update_form.save()
             profile_form.save()
-            # profile_.user = user
-            # profile_.save()
             return HttpResponseRedirect(reverse('profile'))
         else:
             print user_update_form.errors, profile_form.errors
@@ -55,6 +42,40 @@ def profile_update(request):
 
     return render(request, 'imm_stat/edit_profile.html',
                   {'user': user, 'user_update_form': user_update_form, 'profile_form': profile_form})
+
+
+def statistic_view(request, pk):
+    statistic = UserStatistic.objects.filter(user_id=pk).first()
+    stream = Stream()
+    province_stream = ProvincialStream()
+    if statistic:
+        statistic.stream = stream.get_by_choice(statistic.stream)
+        statistic.provincial_stream = province_stream.get_by_choice(statistic.provincial_stream)
+
+    return render(request, 'imm_stat/statistic.html', {'statistic': statistic})
+
+
+@login_required
+def edit_statistic_view(request):
+    user = request.user
+    user_stat = UserStatistic.objects.filter(user_id=user.id).first()
+
+    if request.method == 'POST':
+        statistic_form = StatisticForm(request.POST, instance=user_stat)
+        if statistic_form.is_valid():
+            stat = statistic_form.save(commit=False)
+            stat.username = user.username
+            stat.user_id = user.id
+            stat.save()
+            return HttpResponseRedirect(reverse('statistic', args=[user.id]))
+        else:
+            print statistic_form.errors
+    else:
+        if user_stat:
+            statistic_form = StatisticForm(instance=user_stat)
+        else:
+            statistic_form = StatisticForm()
+    return render(request, 'imm_stat/edit_statistic.html', {'statistic_form': statistic_form})
 
 
 def logout_view(request):
@@ -82,5 +103,5 @@ def register(request):
         user_form = UserCreateForm()
         profile_form = UserProfileForm()
 
-    return render_to_response('imm_stat/register.html',
+    return render_to_response('registration/register.html',
                               {'form': user_form, 'registered': registered, 'profile_form': profile_form}, context)
