@@ -14,11 +14,6 @@
                                                     <th>User Name</th>
                                                     <th>Stream</th>
                                                     <th>from</th>
-                                                    <th>Interview location</th>
-                                                    <th>Interview date</th>
-                                                    <th>Invitation to apply</th>
-                                                    <th>MPNP file date</th>
-                                                    <th>MPNP nomination date</th>
                                                     <th>CIO documents received date</th>
                                                     <th>CIO file number</th>
                                                     <th>Embassy</th>
@@ -33,7 +28,7 @@
                                             <tbody>
                                                 {% for user in userdata %}
                                                     <tr>
-                                                        <td><a href="{% url 'statistic' user.id%}">{{user.username}}</a></td>
+                                                        <td><a href="{% url 'statistic' user.user_id%}">{{user.username}}</a></td>
                                                         <td>{{user.stream|default_if_none:""}}</td>
                                                         <td>{{ user.from_country|default_if_none:"" }}</td>
                                                         <td>{{user.interview_location|default_if_none:""}}</td>

@@ -1,0 +1,47 @@
+[
+  {
+    "pk": 1,
+    "model": "imm_stat.ImmigrationStream",
+    "fields": {
+      "name": "Employer-Driven Stream",
+      "stream_description": "Employer-Driven Stream",
+      "province": 2
+    }
+  },
+  {
+    "pk": 2,
+    "model": "imm_stat.ImmigrationStream",
+    "fields": {
+      "name": "Strategic Recruitment Stream",
+      "stream_description": "Strategic Recruitment Stream",
+      "province": 2
+    }
+  },
+  {
+    "pk": 3,
+    "model": "imm_stat.ImmigrationStream",
+    "fields": {
+      "name": "Self-Employed Farmer Stream",
+      "stream_description": "Self-Employed Farmer Stream",
+      "province": 2
+    }
+  },
+  {
+    "pk": 4,
+    "model": "imm_stat.ImmigrationStream",
+    "fields": {
+      "name": "Manitoba MPNP general stream",
+      "stream_description": "Manitoba MPNP general stream",
+      "province": 1
+    }
+  },
+  {
+    "pk": 5,
+    "model": "imm_stat.ImmigrationStream",
+    "fields": {
+      "name": "Manitoba MPNP strategic stream",
+      "stream_description": "Manitoba MPNP strategic stream",
+      "province": 1
+    }
+  }
+]

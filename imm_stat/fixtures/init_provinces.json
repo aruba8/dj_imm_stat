@@ -1,0 +1,72 @@
+[
+  {
+    "pk": 1,
+    "model": "imm_stat.Province",
+    "fields": {
+      "name": "Manitoba"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "imm_stat.Province",
+    "fields": {
+      "name": "Alberta"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "imm_stat.Province",
+    "fields": {
+      "name": "Ontario"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "imm_stat.Province",
+    "fields": {
+      "name": "Nova Scotia"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "imm_stat.Province",
+    "fields": {
+      "name": "New Brunswick"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "imm_stat.Province",
+    "fields": {
+      "name": "British Columbia"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "imm_stat.Province",
+    "fields": {
+      "name": "Prince Edward Island"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "imm_stat.Province",
+    "fields": {
+      "name": "Saskatchewan"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "imm_stat.Province",
+    "fields": {
+      "name": "Newfoundland and Labrador"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "imm_stat.Province",
+    "fields": {
+      "name": "Quebec"
+    }
+  }
+]

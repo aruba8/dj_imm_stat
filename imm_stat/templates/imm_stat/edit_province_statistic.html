@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form class="form" action="{% url 'edit_provincial_statistic' %}" method="post">
+
+        {% csrf_token %}
+
+        {{ statistic_from.non_field_errors }}
+        <fieldset>
+
+            <table class="table table-condensed table-hover">
+                <tbody>
+                <tr>
+                    <td>
+                        <label>user :</label>
+                    </td>
+                    <td>
+                        {{ user.username }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: red;">{{statistic_form.province.errors}}</span>
+                        <label for="{{ statistic_form.province.id_for_label }}">province :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.province.errors }}</span>
+                        {{ statistic_form.province }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: red;">{{statistic_form.immigration_stream.errors}}</span>
+                        <label for="{{ statistic_form.immigration_stream.id_for_label }}">immigration_stream :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.immigration_stream.errors }}</span>
+                        {{ statistic_form.immigration_stream }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: red;">{{statistic_form.interview_location.errors}}</span>
+                        <label for="{{ statistic_form.interview_location.id_for_label }}">interview_location :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.interview_location.errors }}</span>
+                        {{ statistic_form.interview_location }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: red;">{{statistic_form.interview_date.errors}}</span>
+                        <label for="{{ statistic_form.interview_date.id_for_label }}">interview_date :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.interview_date.errors }}</span>
+                        {{ statistic_form.interview_date }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: red;">{{statistic_form.invitation_to_apply_date.errors}}</span>
+                        <label for="{{ statistic_form.invitation_to_apply_date.id_for_label }}">invitation_to_apply_date :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.invitation_to_apply_date.errors }}</span>
+                        {{ statistic_form.invitation_to_apply_date }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ statistic_form.prov_file_date.id_for_label }}">prov_file_date
+                            :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.prov_file_date.errors }}</span>
+                        {{ statistic_form.prov_file_date }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ statistic_form.prov_request_additional_docs_date.id_for_label }}">prov_request_additional_docs_date :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.prov_request_additional_docs_date.errors }}</span>
+                        {{ statistic_form.prov_request_additional_docs_date }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ statistic_form.prov_nomination_date.id_for_label }}">prov_nomination_date :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.prov_nomination_date.errors }}</span>
+                        {{ statistic_form.prov_nomination_date }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><input class="btn btn-success" type="submit" name="submit" value="Update"></td>
+                    <td><a class="btn btn-warning" href="{% url 'statistic' user.id %}" type="button" name="submit">Cancel</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </form>
+    <script>
+        $(function () {
+            $('.date').datepicker({dateFormat: 'mm/dd/yy'});
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,77 @@
+[
+  {
+    "pk": 1,
+    "model": "imm_stat.ImmigrationProgram",
+    "fields": {
+      "name": "Express Entry for skilled immigrants",
+      "program_description": "Express Entry"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "imm_stat.ImmigrationProgram",
+    "fields": {
+      "name": "Quebec-selected skilled workers",
+      "program_description": "for people with skilled work experience who want to live in the province of Quebec"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "imm_stat.ImmigrationProgram",
+    "fields": {
+      "name": "Provincial nominees",
+      "program_description": "for people who want to go to a specific province"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "imm_stat.ImmigrationProgram",
+    "fields": {
+      "name": "Start-up visa",
+      "program_description": "for people who have a business idea and someone to fund it"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "imm_stat.ImmigrationProgram",
+    "fields": {
+      "name": "Self-employed people",
+      "program_description": "for people who want to be self-employed in agriculture, sports, or the arts"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "imm_stat.ImmigrationProgram",
+    "fields": {
+      "name": "Self-employed people",
+      "program_description": "for people who want to be self-employed in agriculture, sports, or the arts"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "imm_stat.ImmigrationSubProgram",
+    "fields": {
+      "name": "Federal skilled workers ",
+      "sub_program_description": "for people with skilled professional work experience",
+      "program": 1
+    }
+  },
+  {
+    "pk": 2,
+    "model": "imm_stat.ImmigrationSubProgram",
+    "fields": {
+      "name": "Canadian Experience Class",
+      "sub_program_description": "for people with in-Canada skilled professional work experience",
+      "program": 1
+    }
+  },
+  {
+    "pk": 3,
+    "model": "imm_stat.ImmigrationSubProgram",
+    "fields": {
+      "name": "Federal Skilled Trades Program",
+      "sub_program_description": "for people with experience in skilled manual work",
+      "program": 1
+    }
+  }
+]

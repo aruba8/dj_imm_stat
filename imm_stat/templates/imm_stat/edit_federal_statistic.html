@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form class="form" action="{% url 'edit_federal_statistic' %}" method="post">
+
+        {% csrf_token %}
+
+        {{ statistic_from.non_field_errors }}
+        <fieldset>
+
+            <table class="table table-condensed table-hover">
+                <tbody>
+                <tr>
+                    <td>
+{#                        <span style="color: red;">{{statistic_form.user.errors}}</span>#}
+                        <label>user :</label>
+                    </td>
+                    <td>
+{#                        <span style="color: red;">{{ statistic_form.user.errors }}</span>#}
+                        {{ user.username }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: red;">{{statistic_form.inland.errors}}</span>
+                        <label for="{{ statistic_form.inland.id_for_label }}">Inside Canada? :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.inland.errors }}</span>
+                        {{ statistic_form.inland }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: red;">{{statistic_form.immigration_program.errors}}</span>
+                        <label for="{{ statistic_form.immigration_program.id_for_label }}">immigration_program :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.immigration_program.errors }}</span>
+                        {{ statistic_form.immigration_program }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: red;">{{statistic_form.immigration_sub_program.errors}}</span>
+                        <label for="{{ statistic_form.immigration_sub_program.id_for_label }}">immigration_sub_program :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.immigration_sub_program.errors }}</span>
+                        {{ statistic_form.immigration_sub_program }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: red;">{{statistic_form.immigration_stream.errors}}</span>
+                        <label for="{{ statistic_form.immigration_stream.id_for_label }}">immigration_stream :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.immigration_stream.errors }}</span>
+                        {{ statistic_form.immigration_stream }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="color: red;">{{statistic_form.cio_received_date.errors}}</span>
+                        <label for="{{ statistic_form.cio_received_date.id_for_label }}">cio_received_date :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.cio_received_date.errors }}</span>
+                        {{ statistic_form.cio_received_date }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ statistic_form.cio_processing_fee_date.id_for_label }}">cio_processing_fee_date
+                            :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.cio_processing_fee_date.errors }}</span>
+                        {{ statistic_form.cio_processing_fee_date }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ statistic_form.cio_file_number.id_for_label }}">cio_file_number :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.cio_file_number.errors }}</span>
+                        {{ statistic_form.cio_file_number }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ statistic_form.embassy.id_for_label }}">embassy :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.embassy.errors }}</span>
+                        {{ statistic_form.embassy }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ statistic_form.ecas_recieved.id_for_label }}">ecas_recieved :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.ecas_recieved.errors }}</span>
+                        {{ statistic_form.ecas_recieved }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ statistic_form.ecas_in_process.id_for_label }}">ecas_in_process :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.ecas_in_process.errors }}</span>
+                        {{ statistic_form.ecas_in_process }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ statistic_form.ecas_medical_forms.id_for_label }}">ecas_medical_forms :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.ecas_medical_forms.errors }}</span>
+                        {{ statistic_form.ecas_medical_forms }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ statistic_form.ecas_medical_exam_passed.id_for_label }}">ecas_medical_exam_passed
+                            :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.ecas_medical_exam_passed.errors }}</span>
+                        {{ statistic_form.ecas_medical_exam_passed }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ statistic_form.ecas_medical_results_received.id_for_label }}">ecas_medical_results_received
+                            :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.ecas_medical_results_received.errors }}</span>
+                        {{ statistic_form.ecas_medical_results_received }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="{{ statistic_form.povl_date.id_for_label }}">povl_date :</label>
+                    </td>
+                    <td>
+                        <span style="color: red;">{{ statistic_form.povl_date.errors }}</span>
+                        {{ statistic_form.povl_date }}
+                    </td>
+                </tr>
+                <tr>
+                    <td><input class="btn btn-success" type="submit" name="submit" value="Update"></td>
+                    <td><a class="btn btn-warning" href="{% url 'statistic' user.id %}" type="button" name="submit">Cancel</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </form>
+    <script>
+        $(function () {
+            $('.date').datepicker({dateFormat: 'mm/dd/yy'});
+        });
+    </script>
+{% endblock %}

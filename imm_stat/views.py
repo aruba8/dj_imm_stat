@@ -6,9 +6,9 @@ from django.shortcuts import render_to_response, redirect, render
 from django.template.context import RequestContext
 from django.views import generic
 from django.contrib.auth import logout
-from imm_stat.forms import UserCreateForm, UserProfileForm, UserUpdateForm, StatisticForm
+from imm_stat.forms import UserCreateForm, UserProfileForm, UserUpdateForm, FederalStatisticForm, ProvincialStatisticForm
 
-from imm_stat.models import UserStatistic, User, Stream, ProvincialStream
+from imm_stat.models import UserStatisticFederalPhase, User, UserStatisticProvincialPhase
 
 
 class IndexView(generic.ListView):
@@ -16,7 +16,7 @@ class IndexView(generic.ListView):
     context_object_name = 'userdata'
 
     def get_queryset(self):
-        return UserStatistic.objects.all()
+        return UserStatisticFederalPhase.objects.all()
 
 
 @login_required
@@ -45,37 +45,50 @@ def profile_update(request):
 
 
 def statistic_view(request, pk):
-    statistic = UserStatistic.objects.filter(user_id=pk).first()
-    stream = Stream()
-    province_stream = ProvincialStream()
-    if statistic:
-        statistic.stream = stream.get_by_choice(statistic.stream)
-        statistic.provincial_stream = province_stream.get_by_choice(statistic.provincial_stream)
-
-    return render(request, 'imm_stat/statistic.html', {'statistic': statistic})
+    federal_statistic = UserStatisticFederalPhase.objects.filter(user_id=pk).first()
+    provincial_statistic = UserStatisticProvincialPhase.objects.filter(user_id=pk).first()
+    return render(request, 'imm_stat/statistic.html', {'federal_statistic': federal_statistic,
+                                                       'provincial_statistic': provincial_statistic})
 
 
 @login_required
-def edit_statistic_view(request):
+def edit_federal_statistic_view(request):
     user = request.user
-    user_stat = UserStatistic.objects.filter(user_id=user.id).first()
+    user_stat = UserStatisticFederalPhase.objects.filter(user_id=user.id).first()
 
     if request.method == 'POST':
-        statistic_form = StatisticForm(request.POST, instance=user_stat)
+        statistic_form = FederalStatisticForm(request.user, request.POST, instance=user_stat)
         if statistic_form.is_valid():
-            stat = statistic_form.save(commit=False)
-            stat.username = user.username
-            stat.user_id = user.id
-            stat.save()
+            statistic_form.save()
             return HttpResponseRedirect(reverse('statistic', args=[user.id]))
         else:
             print statistic_form.errors
     else:
         if user_stat:
-            statistic_form = StatisticForm(instance=user_stat)
+            statistic_form = FederalStatisticForm(instance=user_stat, current_user=user)
         else:
-            statistic_form = StatisticForm()
-    return render(request, 'imm_stat/edit_statistic.html', {'statistic_form': statistic_form})
+            statistic_form = FederalStatisticForm(current_user=user)
+    return render(request, 'imm_stat/edit_federal_statistic.html', {'statistic_form': statistic_form})
+
+
+@login_required
+def edit_provincial_statistic_view(request):
+    user = request.user
+    user_stat = UserStatisticProvincialPhase.objects.filter(user_id=user.id).first()
+
+    if request.method == 'POST':
+        statistic_form = ProvincialStatisticForm(request.user, request.POST, instance=user_stat)
+        if statistic_form.is_valid():
+            statistic_form.save()
+            return HttpResponseRedirect(reverse('statistic', args=[user.id]))
+        else:
+            print statistic_form.errors
+    else:
+        if user_stat:
+            statistic_form = ProvincialStatisticForm(instance=user_stat, current_user=user)
+        else:
+            statistic_form = ProvincialStatisticForm(current_user=user)
+    return render(request, 'imm_stat/edit_province_statistic.html', {'statistic_form': statistic_form})
 
 
 def logout_view(request):

@@ -14,17 +14,35 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='ProvincialStream',
+            name='ImmigrationProgram',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('stream', models.CharField(default=b'MBG', max_length=3, choices=[(b'MBG', b'Manitoba MPNP general stream'), (b'MBS', b'Manitoba MPNP strategic stream')])),
+                ('name', models.CharField(max_length=200)),
+                ('program_description', models.CharField(max_length=200)),
             ],
         ),
         migrations.CreateModel(
-            name='Stream',
+            name='ImmigrationStream',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('stream', models.CharField(default=b'EE', max_length=2, choices=[(b'EE', b'Skilled immigrants (Express Entry)'), (b'QE', b'Quebec-selected skilled workers (or investor or entrepreneur program)'), (b'SU', b'Start-up visa'), (b'II', b'Immigrant Investor Venture Capital Pilot Program'), (b'SE', b'Self-employed Persons Program'), (b'FS', b'Family sponsorship'), (b'PN', b'Provincial nominees'), (b'CR', b'Caregivers'), (b'RF', b'Refugees')])),
+                ('name', models.CharField(max_length=500)),
+                ('stream_description', models.CharField(max_length=2000)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='ImmigrationSubProgram',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=200)),
+                ('sub_program_description', models.CharField(max_length=2000)),
+                ('program', models.ForeignKey(to='imm_stat.ImmigrationProgram')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Province',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('name', models.CharField(max_length=200)),
             ],
         ),
         migrations.CreateModel(
@@ -36,20 +54,10 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='UserStatistic',
+            name='UserStatisticFederalPhase',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('user_id', models.IntegerField(null=True)),
-                ('username', models.CharField(max_length=80)),
-                ('stream', models.CharField(max_length=2, null=True, choices=[(b'EE', b'Skilled immigrants (Express Entry)'), (b'QE', b'Quebec-selected skilled workers (or investor or entrepreneur program)'), (b'SU', b'Start-up visa'), (b'II', b'Immigrant Investor Venture Capital Pilot Program'), (b'SE', b'Self-employed Persons Program'), (b'FS', b'Family sponsorship'), (b'PN', b'Provincial nominees'), (b'CR', b'Caregivers'), (b'RF', b'Refugees')])),
-                ('provincial_stream', models.CharField(max_length=80, null=True, choices=[(b'MBG', b'Manitoba MPNP general stream'), (b'MBS', b'Manitoba MPNP strategic stream')])),
-                ('from_country', django_countries.fields.CountryField(max_length=2)),
-                ('interview_location', models.CharField(max_length=200, null=True)),
-                ('interview_date', models.DateField(null=True)),
-                ('invitation_to_apply_date', models.DateField(null=True)),
-                ('mpnp_file_date', models.DateField(null=True)),
-                ('mpnp_request_additional_docs_date', models.DateField(null=True)),
-                ('mpnp_nomination_date', models.DateField(null=True)),
+                ('inland', models.BooleanField(default=False)),
                 ('cio_received_date', models.DateField(null=True)),
                 ('cio_processing_fee_date', models.DateField(null=True)),
                 ('cio_file_number', models.DateField(null=True)),
@@ -62,6 +70,30 @@ class Migration(migrations.Migration):
                 ('ecas_medical_results_received', models.DateField(null=True)),
                 ('ecas_additional_documents_request2', models.DateField(null=True)),
                 ('povl_date', models.DateField(null=True)),
+                ('immigration_program', models.ForeignKey(to='imm_stat.ImmigrationProgram')),
+                ('immigration_stream', models.ForeignKey(to='imm_stat.ImmigrationStream', null=True)),
+                ('immigration_sub_program', models.ForeignKey(to='imm_stat.ImmigrationSubProgram', null=True)),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
+        ),
+        migrations.CreateModel(
+            name='UserStatisticProvincialPhase',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('interview_location', models.CharField(max_length=200, null=True)),
+                ('interview_date', models.DateField(null=True)),
+                ('invitation_to_apply_date', models.DateField(null=True)),
+                ('prov_file_date', models.DateField(null=True)),
+                ('prov_request_additional_docs_date', models.DateField(null=True)),
+                ('prov_nomination_date', models.DateField(null=True)),
+                ('immigration_stream', models.ForeignKey(to='imm_stat.ImmigrationStream')),
+                ('province', models.ForeignKey(to='imm_stat.Province')),
+                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+        migrations.AddField(
+            model_name='immigrationstream',
+            name='province',
+            field=models.ForeignKey(to='imm_stat.Province'),
         ),
     ]

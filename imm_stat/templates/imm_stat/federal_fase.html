@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+            <div class="panel panel-primary">
+                    <div class="panel-heading">
+                            <h3 class="panel-title">Header</h3>
+                    </div>
+                    <div class="panel-body">
+                            <div class="table-responsive table-scrollable">
+                                    <table class="table table-condensed table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>User Name</th>
+                                                    <th>Stream</th>
+                                                    <th>CIO documents received date</th>
+                                                    <th>CIO file number</th>
+                                                    <th>Embassy</th>
+                                                    <th>ECAS: in process </th>
+                                                    <th>ECAS: medical forms</th>
+                                                    <th>ECAS: medical exams passed</th>
+                                                    <th>ECAS: medical results received</th>
+                                                    <th>POVL</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for data in userdata %}
+                                                    <tr>
+                                                        <td><a href="{% url 'statistic' data.user.id%}">{{data.user.username}}</a></td>
+                                                        <td>{{data.stream|default_if_none:""}}</td>
+                                                        <td>{{data.cio_received_date|default_if_none:""}}</td>
+                                                        <td>{{data.cio_file_number|default_if_none:""}}</td>
+                                                        <td>{{data.embassy|default_if_none:""}}</td>
+                                                        <td>{{data.ecas_in_process|default_if_none:""}}</td>
+                                                        <td>{{data.ecas_medical_forms|default_if_none:""}}</td>
+                                                        <td>{{data.ecas_medical_exam_passed|default_if_none:""}}</td>
+                                                        <td>{{data.ecas_medical_results_received|default_if_none:""}}</td>
+                                                        <td>{{data.povl_date|default_if_none:""}}</td>
+                                                    </tr>
+                                                {% endfor %}
+
+                                            </tbody>
+                                    </table>
+                        </div>
+                    </div>
+            </div>
+    </div>
+{% endblock %}
