@@ -11,18 +11,18 @@ from imm_stat.forms import UserCreateForm, UserProfileForm, UserUpdateForm, Fede
 from imm_stat.models import UserStatisticFederalPhase, User, UserStatisticProvincialPhase
 
 
-class IndexView(generic.ListView):
+def index_view(request):
     template_name = 'imm_stat/index.html'
-    context_object_name = 'userdata'
-
-    def get_queryset(self):
-        return UserStatisticFederalPhase.objects.all()
+    fed_data = UserStatisticFederalPhase.objects.all()
+    prov_data = UserStatisticProvincialPhase.objects.all()
+    return render(request, template_name, {'federal_data': fed_data, 'province_data': prov_data})
 
 
 @login_required
 def profile(request):
     user = User.objects.get(pk=request.user.id)
     return render(request, 'imm_stat/profile.html', {'user': user})
+
 
 @login_required
 def profile_update(request):

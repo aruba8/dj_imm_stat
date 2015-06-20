@@ -1,11 +1,11 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 from imm_stat.views import profile, profile_update
-from .views import IndexView, register, statistic_view, edit_federal_statistic_view, edit_provincial_statistic_view
+from .views import index_view, register, statistic_view, edit_federal_statistic_view, edit_provincial_statistic_view
 
 urlpatterns = [
     # Examples:
-    url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^$', index_view, name='index'),
     url(r'^login/$', 'django.contrib.auth.views.login'),
     url(r'^register/$', register, name='register'),
     url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),

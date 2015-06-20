@@ -1,58 +1,101 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="row">
+    <div class="federal_table">
+        <div class="row">
             <div class="panel panel-primary">
-                    <div class="panel-heading">
-                            <h3 class="panel-title">Header</h3>
-                    </div>
-                    <div class="panel-body">
-                            <div class="table-responsive table-scrollable">
-                                    <table class="table table-condensed table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>User Name</th>
-                                                    <th>Stream</th>
-                                                    <th>from</th>
-                                                    <th>CIO documents received date</th>
-                                                    <th>CIO file number</th>
-                                                    <th>Embassy</th>
-                                                    <th>Embassy documents received</th>
-                                                    <th>ECAS: in process </th>
-                                                    <th>ECAS: medical forms</th>
-                                                    <th>ECAS: medical exams passed</th>
-                                                    <th>ECAS: medical results received</th>
-                                                    <th>POVL</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for user in userdata %}
-                                                    <tr>
-                                                        <td><a href="{% url 'statistic' user.user_id%}">{{user.username}}</a></td>
-                                                        <td>{{user.stream|default_if_none:""}}</td>
-                                                        <td>{{ user.from_country|default_if_none:"" }}</td>
-                                                        <td>{{user.interview_location|default_if_none:""}}</td>
-                                                        <td>{{user.interview_date|default_if_none:"" }}</td>
-                                                        <td>{{user.invitation_to_apply_date|default_if_none:""}}</td>
-                                                        <td>{{user.mpnp_file_date|default_if_none:""}}</td>
-                                                        <td>{{user.mpnp_nomination_date|default_if_none:""}}</td>
-                                                        <td>{{user.cio_received_date|default_if_none:""}}</td>
-                                                        <td>{{user.cio_processing_fee_date|default_if_none:""}}</td>
-                                                        <td>{{user.cio_file_number|default_if_none:""}}</td>
-                                                        <td>{{user.embassy|default_if_none:""}}</td>
-                                                        <td>{{user.ecas_recieved|default_if_none:""}}</td>
-                                                        <td>{{user.ecas_in_process|default_if_none:""}}</td>
-                                                        <td>{{user.ecas_medical_forms|default_if_none:""}}</td>
-                                                        <td>{{user.ecas_medical_exam_passed|default_if_none:""}}</td>
-                                                        <td>{{user.ecas_medical_results_received|default_if_none:""}}</td>
-                                                        <td>{{user.povl_date|default_if_none:""}}</td>
-                                                    </tr>
-                                                {% endfor %}
+                <div class="panel-heading">
+                    <h3 class="panel-title">Federal stats (dates in d/m/y format)</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive table-scrollable">
+                        <table class="table table-condensed table-hover">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Inland</th>
+                                <th>CIO received</th>
+{#                                <th>CIO processing fee</th>#}
+                                <th>CIO file number</th>
+                                <th>Embassy</th>
+                                <th>ECAS recieved</th>
+                                <th>ECAS in process</th>
+                                <th>Med. forms</th>
+                                <th>Med. exams passed</th>
+                                <th>Med. results received</th>
+                                <th>POVL</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for data in federal_data %}
+                                <tr>
+                                    <td><a href="{% url 'statistic' data.user.id %}">{{ data.user.username }}</a></td>
+                                    <td>{{ data.inland|default_if_none:""}}</td>
+                                    <td>{{ data.cio_received_date|date:"d/m/y"|default_if_none:""}}</td>
+{#                                    <td>{{ data.cio_processing_fee_date|date:"d/m/y"|default_if_none:""}}</td>#}
+                                    <td>{{ data.cio_file_number|date:"d/m/y"|default_if_none:""}}</td>
+                                    <td>{{ data.embassy|default_if_none:""}}</td>
+                                    <td>{{ data.ecas_recieved|date:"d/m/y"|default_if_none:""}}</td>
+                                    <td>{{ data.ecas_in_process|date:"d/m/y"|default_if_none:"-"}}</td>
+                                    <td>{{ data.ecas_medical_forms|date:"d/m/y"|default_if_none:""}}</td>
+                                    <td>{{ data.ecas_medical_exam_passed|date:"d/m/y"|default_if_none:""}}</td>
+                                    <td>{{ data.ecas_medical_results_received|date:"d/m/y"|default_if_none:""}}</td>
+                                    <td>{{ data.povl_date|date:"d/m/y"|default_if_none:""}}</td>
+                                </tr>
+                            {% endfor %}
 
-                                            </tbody>
-                                    </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <div class="province_table">
+    <div class="row">
+        <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Province stats (dates in d/m/y format)</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive table-scrollable">
+                        <table class="table table-condensed table-hover">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Province</th>
+                                <th>Stream</th>
+                                <th>Interview location</th>
+                                <th>Interview date</th>
+                                <th>Invitation to apply</th>
+                                <th>File date</th>
+                                <th>Provincial request additional docs date</th>
+                                <th>Provincial nomination date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for data in province_data %}
+                                <tr>
+                                    <td><a href="{% url 'statistic' data.user.id %}">{{ data.user.username }}</a></td>
+                                    <td>{{ data.province|default_if_none:""}}</td>
+                                    <td>{{ data.immigration_stream|date:"d/m/y"|default_if_none:""}}</td>
+                                    <td>{{ data.interview_location|date:"d/m/y"|default_if_none:""}}</td>
+                                    <td>{{ data.interview_date|date:"d/m/y"|default_if_none:""}}</td>
+                                    <td>{{ data.invitation_to_apply_date|default_if_none:""}}</td>
+                                    <td>{{ data.prov_file_date|date:"d/m/y"|default_if_none:""}}</td>
+                                    <td>{{ data.prov_request_additional_docs_date|date:"d/m/y"|default_if_none:"-"}}</td>
+                                    <td>{{ data.prov_nomination_date|date:"d/m/y"|default_if_none:""}}</td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
     </div>
 {% endblock %}

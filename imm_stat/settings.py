@@ -107,3 +107,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
+SESSION_COOKIE_AGE = 60 * 15 # 15 minutes

@@ -5,11 +5,11 @@
     {% if federal_statistic %}
         <table class="table table-condensed table-hover">
             <tbody>
-            <tr><td>Username :</td><td> {{ user.username }}</td></tr>
+            <tr><td>Username :</td><td> {{ federal_statistic.user.username }}</td></tr>
             <tr><td>Inland :</td><td> {{ federal_statistic.inland }}</td></tr>
-            <tr><td>immigration_program :</td><td> {{ federal_statistic.immigration_program |default_if_none:""}}</td></tr>
-            <tr><td>immigration_sub_program :</td><td> {{ federal_statistic.immigration_sub_program |default_if_none:""}}</td></tr>
-            <tr><td>immigration_stream :</td><td> {{ federal_statistic.immigration_stream |default_if_none:""}}</td></tr>
+            <tr><td>Immigration program :</td><td> {{ federal_statistic.immigration_program |default_if_none:""}}</td></tr>
+            <tr><td>Immigration subprogram :</td><td> {{ federal_statistic.immigration_sub_program |default_if_none:""}}</td></tr>
+            <tr><td>Immigration stream :</td><td> {{ federal_statistic.immigration_stream |default_if_none:""}}</td></tr>
             <tr><td>CIO received date :</td><td> {{ federal_statistic.cio_received_date|default_if_none:"" }}</td></tr>
             <tr><td>CIO processing fee date :</td><td> {{ federal_statistic.cio_processing_fee_date|default_if_none:"" }}</td></tr>
             <tr><td>CIO file number :</td><td> {{ federal_statistic.cio_file_number|default_if_none:"" }}</td></tr>
@@ -34,16 +34,16 @@
     {% if provincial_statistic %}
         <table class="table table-condensed table-hover">
             <tbody>
-            <tr><td>province :</td><td> {{ provincial_statistic.province }}</td></tr>
-            <tr><td>immigration_stream :</td><td> {{ provincial_statistic.immigration_stream |default_if_none:""}}</td></tr>
-            <tr><td>interview_location :</td><td> {{ provincial_statistic.interview_location |default_if_none:""}}</td></tr>
-            <tr><td>interview_date :</td><td> {{ provincial_statistic.interview_date |default_if_none:""}}</td></tr>
-            <tr><td>invitation_to_apply_date</td><td> {{ provincial_statistic.invitation_to_apply_date|default_if_none:"" }}</td></tr>
-            <tr><td>prov_file_date</td><td> {{ provincial_statistic.prov_file_date|default_if_none:"" }}</td></tr>
-            <tr><td>prov_request_additional_docs_date</td><td> {{ provincial_statistic.prov_request_additional_docs_date|default_if_none:"" }}</td></tr>
-            <tr><td>prov_nomination_date :</td><td> {{ provincial_statistic.prov_nomination_date|default_if_none:""}}</td></tr>
+            <tr><td>Province :</td><td> {{ provincial_statistic.province }}</td></tr>
+            <tr><td>Immigration stream :</td><td> {{ provincial_statistic.immigration_stream |default_if_none:""}}</td></tr>
+            <tr><td>Interview location :</td><td> {{ provincial_statistic.interview_location |default_if_none:""}}</td></tr>
+            <tr><td>Interview date :</td><td> {{ provincial_statistic.interview_date |default_if_none:""}}</td></tr>
+            <tr><td>Invitation to apply date :</td><td> {{ provincial_statistic.invitation_to_apply_date|default_if_none:"" }}</td></tr>
+            <tr><td>Prov file date :</td><td> {{ provincial_statistic.prov_file_date|default_if_none:"" }}</td></tr>
+            <tr><td>Prov request additional docs date :</td><td> {{ provincial_statistic.prov_request_additional_docs_date|default_if_none:"" }}</td></tr>
+            <tr><td>Prov nomination date :</td><td> {{ provincial_statistic.prov_nomination_date|default_if_none:""}}</td></tr>
             {% if user.id == provincial_statistic.user_id %}
-            <tr><td><a class="btn btn-warning" href="{% url 'edit_provincial_statistic' %}" type="button" name="submit">Edit provincial_statistic</a></td><td></td></tr>
+            <tr><td><a class="btn btn-warning" href="{% url 'edit_provincial_statistic' %}" type="button" name="submit">Edit provincial statistic</a></td><td></td></tr>
             {% endif %}
 
             </tbody>

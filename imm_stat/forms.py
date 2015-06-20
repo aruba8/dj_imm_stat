@@ -129,12 +129,12 @@ class ProvincialStatisticForm(forms.ModelForm):
         self.current_user = current_user
         super(ProvincialStatisticForm, self).__init__(*args, **kwargs)
         self.fields['province'].widget.attrs['class'] = 'form-control date'
-        self.fields['immigration_stream'].widget.attrs['class'] = 'form-control date'
-        self.fields['interview_location'].widget.attrs['class'] = 'form-control date'
+        self.fields['immigration_stream'].widget.attrs['class'] = 'form-control'
+        self.fields['interview_location'].widget.attrs['class'] = 'form-control'
         self.fields['interview_date'].widget.attrs['class'] = 'form-control date'
         self.fields['invitation_to_apply_date'].widget.attrs['class'] = 'form-control date'
         self.fields['prov_file_date'].widget.attrs['class'] = 'form-control date'
-        self.fields['prov_request_additional_docs_date'].widget.attrs['class'] = 'form-control'
+        self.fields['prov_request_additional_docs_date'].widget.attrs['class'] = 'form-control date'
         self.fields['prov_nomination_date'].widget.attrs['class'] = 'form-control date'
 
     province = forms.ModelChoiceField(queryset=Province.objects.all())
